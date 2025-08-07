@@ -4,39 +4,32 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Checking out code...'
-                checkout scm
+                echo 'Checking out the code...'
+                git 'https://github.com/unnathi-rb/JENKINS-task.git'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the project...'
-                sh 'echo Build step goes here'
+                echo 'Building the application...'
+                // Add build commands here, like: sh 'npm install' or sh 'make build'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'echo Test step goes here'
+                // Add test commands here
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the project...'
-                sh 'echo Deploy step goes here'
+                echo 'Deploying the application...'
+                // Add deployment commands here
             }
         }
     }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
-        }
-    }
 }
+
+
