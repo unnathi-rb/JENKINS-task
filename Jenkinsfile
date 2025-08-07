@@ -1,29 +1,11 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
+        stage('Hello') {
             steps {
-                echo 'Checking out code...'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                echo 'Building the application...'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
+                echo '✅ Hello from Jenkins!'
             }
         }
     }
 }
+
