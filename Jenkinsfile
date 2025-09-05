@@ -25,22 +25,21 @@ pipeline {
 
         stage('Package') {
             steps {
-                echo "🔹 Creating JAR file..."
-                bat 'jar cfe game.jar game game.class'
+                echo "🔹 Packaging into JAR..."
+                bat 'jar cfe game.jar game game.class input.txt'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "🔹 Deploy step (simulation)..."
-                echo "✅ Game packaged successfully. Ready for deployment!"
+                echo "🚀 Deploy step (simulated)"
             }
         }
     }
 
     post {
         success {
-            echo "🎉 Pipeline executed successfully!"
+            echo "✅ Pipeline finished successfully!"
         }
         failure {
             echo "❌ Pipeline failed."
