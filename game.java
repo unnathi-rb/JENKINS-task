@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class Game {
+public class game {
     public static void main(String[] args) {
         Random random = new Random();
         String[] choices = {"rock", "paper", "scissors"};
