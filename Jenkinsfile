@@ -4,48 +4,47 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo '🔹 Checking out code...'
+                echo "🔹 Checking out code..."
                 checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                echo '🔹 Compiling RockPaperScissors.java...'
-                sh 'mkdir -p build'
-                sh 'javac -d build RockPaperScissors.java'
+                echo "🔹 Compiling RockPaperScissors.java..."
+                bat 'javac game.java'
             }
         }
 
         stage('Test') {
             steps {
-                echo '🔹 Running Rock, Paper, Scissors (auto input)...'
-                // Feeds "Rock" as input to avoid pipeline hang
-                sh 'echo "Rock" | java -cp build RockPaperScissors'
+                echo "🔹 Running RockPaperScissors..."
+                bat 'java game'
             }
         }
 
         stage('Package') {
             steps {
-                echo '🔹 Creating JAR...'
-                sh 'jar cfe build/RockPaperScissors.jar RockPaperScissors -C build .'
+                echo "🔹 Creating JAR file..."
+                bat 'jar cfe game.jar game game.class'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo '🔹 Deploying JAR to /tmp/deploy...'
-                sh 'mkdir -p /tmp/deploy && cp build/RockPaperScissors.jar /tmp/deploy/'
+                echo "🔹 Deploy step (simulation)..."
+                echo "✅ Game packaged successfully. Ready for deployment!"
             }
         }
     }
 
     post {
         success {
-            echo '✅ Rock, Paper, Scissors pipeline completed successfully!'
+            echo "🎉 Pipeline executed successfully!"
         }
         failure {
-            echo '❌ Pipeline failed.'
+            echo "❌ Pipeline failed."
         }
     }
 }
+
