@@ -3,38 +3,35 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class game {
+public class Game {
     public static void main(String[] args) {
         Random random = new Random();
         String[] choices = {"rock", "paper", "scissors"};
         String userChoice = "";
         String computerChoice = choices[random.nextInt(3)];
 
-        // Try reading from input.txt
+        // Read from input.txt
         try {
             File file = new File("input.txt");
             if (file.exists()) {
                 Scanner fileScanner = new Scanner(file);
                 if (fileScanner.hasNextLine()) {
-                    userChoice = fileScanner.nextLine().toLowerCase();
+                    userChoice = fileScanner.nextLine().trim().toLowerCase(); // trim spaces
                     System.out.println("User choice (from file): " + userChoice);
                 }
                 fileScanner.close();
+            } else {
+                System.out.println("⚠ input.txt not found. Using default choice 'rock'.");
+                userChoice = "rock";
             }
         } catch (FileNotFoundException e) {
-            System.out.println("⚠ input.txt not found. Switching to manual input...");
-        }
-
-        // If file not used, fall back to console input
-        if (userChoice.isEmpty()) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter your choice (rock, paper, scissors): ");
-            userChoice = scanner.nextLine().toLowerCase();
-            scanner.close();
+            System.out.println("⚠ input.txt not found. Using default choice 'rock'.");
+            userChoice = "rock";
         }
 
         System.out.println("Computer chose: " + computerChoice);
 
+        // Determine winner
         if (userChoice.equals(computerChoice)) {
             System.out.println("It's a draw!");
         } else if (
@@ -48,9 +45,10 @@ public class game {
         ) {
             System.out.println("❌ You lose!");
         } else {
-            System.out.println("⚠ Invalid choice. Please type rock, paper, or scissors.");
+            System.out.println("⚠ Invalid choice in input.txt! Using default 'rock'.");
         }
     }
 }
+
 
 
