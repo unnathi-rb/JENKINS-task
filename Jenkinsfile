@@ -12,34 +12,35 @@ pipeline {
         stage('Build') {
             steps {
                 echo "🔹 Compiling game.java..."
-                bat 'javac game.java'
+                bat '"C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe" game.java'
             }
         }
 
         stage('Run') {
             steps {
                 echo "🔹 Running the game..."
-                bat 'java game'
+                bat '"C:\\Program Files\\Java\\jdk-21\\bin\\java.exe" game'
             }
         }
 
         stage('Package') {
             steps {
                 echo "🔹 Packaging into JAR..."
-                bat 'jar cfe game.jar game game.class input.txt'
+                bat '"C:\\Program Files\\Java\\jdk-21\\bin\\jar.exe" cfe game.jar game game.class input.txt'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "🚀 Deploy step (simulated)"
+                echo "🚀 Deploying..."
+                echo "✅ Deployment successful (simulation)."
             }
         }
     }
 
     post {
         success {
-            echo "✅ Pipeline finished successfully!"
+            echo "🎉 Pipeline completed successfully!"
         }
         failure {
             echo "❌ Pipeline failed."
