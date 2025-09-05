@@ -12,21 +12,21 @@ pipeline {
         stage('Prepare Input') {
             steps {
                 echo "🔹 Creating input.txt for Jenkins run..."
-                bat 'echo rock > input.txt'  // You can change "rock" to any default choice
+                bat 'echo rock>input.txt' // no spaces around > to avoid trailing space
             }
         }
 
         stage('Build') {
             steps {
                 echo "🔹 Compiling Game.java..."
-                bat '"C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe" game.java'
+                bat '"C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe" Game.java'
             }
         }
 
         stage('Run') {
             steps {
                 echo "🔹 Running the game..."
-                bat '"C:\\Program Files\\Java\\jdk-21\\bin\\java.exe" game'
+                bat '"C:\\Program Files\\Java\\jdk-21\\bin\\java.exe" Game'
             }
         }
     }
@@ -40,6 +40,7 @@ pipeline {
         }
     }
 }
+
 
 
 
